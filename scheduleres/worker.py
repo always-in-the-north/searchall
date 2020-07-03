@@ -5,9 +5,10 @@ import os
 
 from peewee import SqliteDatabase
 
-from manhua.config import get_config
-from manhua.loggings import logger
-from manhua.customexception import SqliteDbFilenotFoundError
+from scheduleres.config import get_config
+from scheduleres.loggings import logger
+from scheduleres.customexception import SqliteDbFilenotFoundError
+from scheduleres.utils import get_abspath
 
 from downloaders.imgentity import ImgEntity
 from downloaders.downloader import DownLoader
@@ -35,10 +36,11 @@ class ProxiesWorker(object):
 			return self._proxies_db
 		else: 
 			# logger.debug('create new db connection')
-			if(not os.path.exists(get_config('db_path', './scylla.db'))):
+			dbpath = get_abspath(get_config('db_path', './scylla.db'))
+			if(not os.path.exists(dbpath)):
 				raise SqliteDbFilenotFoundError("Sqlit db file not exists")
 
-			self._proxies_db = SqliteDatabase(get_config('db_path', './scylla.db'))
+			self._proxies_db = SqliteDatabase(dbpath)
 			return self._proxies_db
 
 	

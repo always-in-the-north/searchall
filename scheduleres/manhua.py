@@ -7,7 +7,7 @@ from providers.fzdm import Fzdm
 from downloaders.downloader import DownLoader
 from downloaders.imgentity import ImgEntity
 
-from manhua.loggings import logger
+from scheduleres.loggings import logger
 
 _d = DownLoader()
 

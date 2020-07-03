@@ -13,8 +13,8 @@ _config_data.update({
 	"db_dbname": "mysql",
 
 	# proxies
-	"db_path": "E:\\python\\scylla\\scylla.db",
-	"db_path_qiushibaike": "E:\\python\\manhua\\qiushibaike.db",
+	"db_path": "./db/scylla.db",
+	"db_path_qiushibaike": "./db/qiushibaike.db",
 	"db_proxies_count": 10,
 
 	#download

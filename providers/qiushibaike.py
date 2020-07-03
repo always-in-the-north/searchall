@@ -1,10 +1,11 @@
 from bs4 import BeautifulSoup
 
 from providers.BaseProvider import BaseProvider
-from manhua.worker import Worker
 
-from manhua.database import QiuShiBaiKeArticle
-from manhua.database import create_db_tables_sqlite
+from scheduleres.worker import Worker
+from scheduleres.database import QiuShiBaiKeArticle
+from scheduleres.database import create_db_tables_sqlite
+from scheduleres.loggings import logger
 
 import re
 import pysnooper
@@ -41,7 +42,7 @@ class QiuShiBaiKe(BaseProvider):
 
 			for article in articles:
 				q = QiuShiBaiKeArticle()
-				basic_query = q.select().where(QiuShiBaiKeArticle.articleId == article.id)
+				basic_query = q.select().where(QiuShiBaiKeArticle.articleId == article["id"])
 
 				if basic_query.count() == 0:
 					q.articleId = article["id"]
@@ -63,6 +64,9 @@ class QiuShiBaiKe(BaseProvider):
 					q.articleComment = statsdiv.find("span", class_="stats-comments").i.string
 
 					q.save()
+					logger.info('info update successfully.')
+				else:
+					logger.info('info exsits.')
 
 
 

@@ -4,8 +4,9 @@ from peewee import ForeignKeyField, CharField, AutoField, DateTimeField, Boolean
 
 from playhouse.signals import Model
 
-from manhua.config import get_config
-from manhua.customexception import SqliteDbFilenotFoundError
+from scheduleres.config import get_config
+from scheduleres.customexception import SqliteDbFilenotFoundError
+from scheduleres.utils import get_abspath
 _db = None
 
 
@@ -29,10 +30,11 @@ def create_connection_sqlite() -> SqliteDatabase:
 	create a database connection
 	:rtype: SqliteDatabase
 	"""
-	if(not os.path.exists(get_config('db_path_qiushibaike', './qiushibaike.db'))):
+	dbpath = get_abspath(get_config('db_path_qiushibaike', './qiushibaike.db'))
+	if(not os.path.exists(dbpath)):
 		raise SqliteDbFilenotFoundError("Sqlit db file not exists")
 
-	return SqliteDatabase(get_config('db_path_qiushibaike', './qiushibaike.db'))
+	return SqliteDatabase(dbpath)
 
 
 class BaseModel(Model):
@@ -150,5 +152,7 @@ class QiuShiBaiKeArticle(BaseModelSqlite):
 
 	articleFunny = CharField()
 	articleComment = CharField()
+
+	tag = CharField()
 
 	updatedate = DateTimeField(default=datetime.datetime.now)

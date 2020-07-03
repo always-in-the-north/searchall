@@ -1,9 +1,9 @@
 from bs4 import BeautifulSoup
 
-from manhua.worker import Worker
-from manhua.database import Manhua, ManhuaSub, ManhuaSetting
-from manhua.loggings import logger
-from manhua.config import get_config
+from scheduleres.worker import Worker
+from scheduleres.database import Manhua, ManhuaSub, ManhuaSetting
+from scheduleres.loggings import logger
+from scheduleres.config import get_config
 
 from downloaders.imgentity import ImgEntity
 from providers.BaseProvider import BaseProvider

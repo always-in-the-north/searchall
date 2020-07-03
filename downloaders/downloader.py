@@ -5,11 +5,13 @@ import os
 import hashlib
 import time
 
-from manhua.loggings import logger
+from scheduleres.loggings import logger
+from scheduleres.utils import get_format_time
+from scheduleres.config import get_config
+from scheduleres.database import ManhuaSub
+from scheduleres.utils import get_abspath
+
 from .imgentity import ImgEntity
-from manhua.utils import get_format_time
-from manhua.config import get_config
-from manhua.database import ManhuaSub
 
 import pysnooper
 
@@ -19,7 +21,7 @@ class DownLoader(object):
 	__connecttime = 5
 
 	"""docstring for ClassName"""
-	def __init__(self, folderpath = "E:\\python\\manhua\\downloaders\\download\\", sleeptime = 3):
+	def __init__(self, folderpath = get_abspath(".\\downloaders\\download\\"), sleeptime = 3):
 		super(DownLoader, self).__init__()
 		self.folderpath = folderpath
 		self.sleeptime = sleeptime
@@ -27,7 +29,7 @@ class DownLoader(object):
 
 	def get_img_path(self, md5_str, entity):
 		# 获取图片路径
-		from manhua.utils import get_format_time
+		from scheduleres.utils import get_format_time
 		return self.folderpath + get_format_time("1") + "_" + md5_str + "." + entity.kuozhanming
 
 	def get_img_kuozhanming(self, res):
