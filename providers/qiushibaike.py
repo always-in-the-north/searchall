@@ -19,7 +19,7 @@ class QiuShiBaiKe(BaseProvider):
 		create_db_tables_sqlite([QiuShiBaiKeArticle])
 
 	def schedulerparse(self):
-		schedule.every(12).hour.do(parse)
+		schedule.every(12).hours.do(parse)
 
 		while flag:
 			try:
