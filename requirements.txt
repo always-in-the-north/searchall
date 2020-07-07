@@ -1,5 +1,5 @@
 requests
 pysnooper
-BeautifulSoup
+BeautifulSoup4
 peewee
 schedule
