@@ -10,6 +10,7 @@ from scheduleres.loggings import logger
 import re
 import pysnooper
 import schedule
+import time 
 
 class QiuShiBaiKe(BaseProvider):
 	def __init__(self):
@@ -19,9 +20,11 @@ class QiuShiBaiKe(BaseProvider):
 		create_db_tables_sqlite([QiuShiBaiKeArticle])
 
 	def schedulerparse(self):
-		schedule.every(12).hours.do(parse)
+		self.parse()
+		
+		schedule.every(12).hours.do(self.parse)
 
-		while flag:
+		while True:
 			try:
 				schedule.run_pending()
 
